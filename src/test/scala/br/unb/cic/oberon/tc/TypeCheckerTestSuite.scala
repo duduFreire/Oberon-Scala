@@ -519,7 +519,7 @@ class TypeCheckerTestSuite  extends AbstractTestSuite {
 
     val cases = List(case01, case02)
 
-    val stmt03 = CaseStmt(Undef(), cases, Some(caseElse))
+    val stmt03 = CaseStmt(Undef, cases, Some(caseElse))
 
     val testModule = OberonModule(
       name="switch-case-test",
@@ -615,8 +615,8 @@ class TypeCheckerTestSuite  extends AbstractTestSuite {
     val caseElse = AssignmentStmt("x", IntValue(20))
 
 
-    val case01 = SimpleCase(Undef(), stmt01)
-    val case02 = SimpleCase(Undef(), stmt01)
+    val case01 = SimpleCase(Undef, stmt01)
+    val case02 = SimpleCase(Undef, stmt01)
     val cases = List(case01, case02)
 
     val stmt02 = CaseStmt(IntValue(10), cases, Some(caseElse))

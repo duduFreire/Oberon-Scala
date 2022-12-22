@@ -89,7 +89,7 @@ sealed abstract class Value extends Expression with Ordered[Value]{
   }
 }
 
-sealed trait Number extends Expression {
+sealed trait Number extends Value {
   def +(that: Number): Number
   def -(that: Number): Number
   def *(that: Number): Number
@@ -161,12 +161,15 @@ case object NullValue extends Value {
 	type T = Unit
 	def value: T = ()
 }
+case object Undef extends Value {
+	type T = Unit
+	def value: T = ()
+}
 
 case class Location(loc: Int) extends Expression
 case class Brackets(exp: Expression) extends Expression
-case class ArrayValue(value: ListBuffer[Expression], arrayType: ArrayType) extends Value { type T = ListBuffer[Expression] }
+case class ArrayValue(value: ListBuffer[Value], arrayType: ArrayType) extends Value { type T = ListBuffer[Value] }
 case class ArraySubscript(arrayBase: Expression, index: Expression) extends Expression
-case class Undef() extends Expression
 case class FieldAccessExpression(exp: Expression, name: String) extends Expression
 case class PointerAccessExpression(name: String) extends Expression
 case class VarExpression(name: String) extends Expression

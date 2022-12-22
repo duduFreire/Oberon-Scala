@@ -239,7 +239,7 @@ case class PaigesBasedGenerator() extends CCodeGenerator {
       case IntValue(v) => v.toString
       case Brackets(exp) => s"( ${genExp(exp)} )"
       case BoolValue(v) => if (v) "true" else "false"
-      case Undef() => "undefined"
+      case Undef => "undefined"
 
       case VarExpression(name) => name
       case FunctionCallExpression(name, args) =>

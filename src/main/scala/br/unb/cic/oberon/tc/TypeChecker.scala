@@ -22,7 +22,7 @@ class ExpressionTypeVisitor(val typeChecker: TypeChecker) extends OberonVisitorA
     case BoolValue(_) => Some(BooleanType)
     case StringValue(_) => Some(StringType)
     case NullValue => Some(NullType)
-    case Undef() => None
+    case Undef => None
     case VarExpression(name) => typeChecker.env.lookup(name)
     case EQExpression(left, right) =>
       computeBinExpressionType(left, right, List(IntegerType, RealType, BooleanType), BooleanType)

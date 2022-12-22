@@ -636,7 +636,7 @@ class InterpreterTest extends AnyFunSuite {
     assert(interpreter.env.lookup("i").isDefined)
     assert(interpreter.env.lookup("arr").isDefined)
 
-    assert(evalArraySubscript("arr", 5) == Undef())
+    assert(evalArraySubscript("arr", 5) == Undef)
     assert(evalArraySubscript("arr", 0) == IntValue(1))
     assert(evalArraySubscript("arr", 9) == IntValue(2))
   }

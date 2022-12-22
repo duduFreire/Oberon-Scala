@@ -62,6 +62,7 @@ object JVMCodeGenerator extends CodeGenerator {
           case BoolValue (value) => {
             cw.visitField(ACC_PUBLIC + ACC_FINAL, constant.name, "Z", null, value).visitEnd();
           }
+		      case _ => throw new Exception("Non-exhaustive match in case statement.")
         }
     }
   }

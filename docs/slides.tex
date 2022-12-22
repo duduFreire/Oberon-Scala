@@ -306,7 +306,7 @@ def call(p: Procedure, args: List[Expression]): Unit = {
         .foreach(pair => env.setLocalVariable(pair._1, pair._2))
 
   p.constants.foreach(c => env.setLocalVariable(c.name, c.exp))
-  p.variables.foreach(v => env.setLocalVariable(v.name, Undef()))
+  p.variables.foreach(v => env.setLocalVariable(v.name, Undef))
 }
     \end{lstlisting}  
   \end{scriptsize}

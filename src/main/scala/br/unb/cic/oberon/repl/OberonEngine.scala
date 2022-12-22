@@ -49,7 +49,7 @@ class OberonEngine extends ScriptEngine {
 
   override def put(name: String, value: Object): Unit = {
     //println(f"put call ($name = $value)")
-    interpreter.env.setGlobalVariable(name, objectToExpression(value))
+    interpreter.env.setGlobalVariable(name, objectToExpression(value).accept(new EvalExpressionVisitor(interpreter)))
   }
 
   override def get(name: String): Object = {
@@ -195,13 +195,8 @@ class OberonEngine extends ScriptEngine {
     null
   }
 
-  private def expressionValue(exp: Expression): Any = {
-    val result = exp.accept(expressionEval)
-    result match {
-      case v: Value => return v.value
-      case _: Undef => return null
-    }
-    exp
+  private def expressionValue(exp: Expression): Value = {
+    exp.accept(expressionEval)
   }
 
   private def objectToExpression(obj: Object): Expression = {
@@ -211,10 +206,10 @@ class OberonEngine extends ScriptEngine {
       case b: Boolean => BoolValue(b)
       case e: Exception => StringValue(e.getMessage)
       case e: Expression => e.accept(expressionEval)
-      //case _: BoxedUnit => Undef()
+      //case _: BoxedUnit => Undef
       case _ =>
         if (obj != null) println(f"Cannot convert $obj to expression")
-        Undef()
+        Undef
     }
   }
 
